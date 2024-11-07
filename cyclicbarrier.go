@@ -2,6 +2,7 @@ package barrier
 
 import (
 	"context"
+	"fmt"
 	"sync"
 )
 
@@ -38,6 +39,10 @@ func NewCyclicBarrier(parties int) *CyclicBarrier {
 	barrier.cond = sync.NewCond(&barrier.mutex)
 
 	return barrier
+}
+
+func (me *CyclicBarrier) String() string {
+	return fmt.Sprintf("CyclicBarrier{Parties: %d, Waiting: %d}", me.parties, me.waiting)
 }
 
 // Await は、他のgoroutineが到達するのを待機します.
